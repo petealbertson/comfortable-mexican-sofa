@@ -104,6 +104,17 @@ class Comfy::Cms::Page < ActiveRecord::Base
     self
   end
 
+  def is_viewable_by(user)
+    if user.role == ("staff" or "admin")
+      true
+    elsif
+      user.site == self.site.identifier and user.role == "professional"
+    else
+      puts "reject"
+      false
+    end
+  end
+
 protected
 
   def assigns_label
