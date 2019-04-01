@@ -104,15 +104,12 @@ class Comfy::Cms::Page < ActiveRecord::Base
     self
   end
 
-  def is_viewable_by(user)
-    if user.role == ("staff" or "admin")
-      true
-    elsif
-      user.site == self.site.identifier and user.role == "professional"
-    else
-      puts "reject"
-      false
-    end
+  def is_public
+    !self.workers and !self.families
+  end
+
+  def is_viewable_by_role(role)
+    role.include? "admin" or role.include? "staff" or self[role.to_sym]
   end
 
 protected
