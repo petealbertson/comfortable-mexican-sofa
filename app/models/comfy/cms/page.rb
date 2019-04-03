@@ -110,6 +110,14 @@ class Comfy::Cms::Page < ActiveRecord::Base
     self
   end
 
+  def is_public
+    !self.workers and !self.families
+  end
+
+  def is_viewable_by_role(role)
+    role.include? "admin" or role.include? "staff" or self[role.to_sym]
+  end
+
 protected
 
   def assigns_label
