@@ -45,8 +45,8 @@ class Comfy::Cms::Page < ActiveRecord::Base
   # -- Scopes ------------------------------------------------------------------
   scope :published, -> { where(is_published: true) }
   scope :is_public, -> { where(families: false).where(workers: false) }
-  scope :family_viewable, -> { where(families: true) }
-  scope :worker_viewable, -> { where(workers: true) }
+  scope :family_viewable, -> { where(families: true).or(self.is_public) }
+  scope :worker_viewable, -> { where(workers: true).or(self.is_public) }
 
   # -- Class Methods -----------------------------------------------------------
   # Tree-like structure for pages
