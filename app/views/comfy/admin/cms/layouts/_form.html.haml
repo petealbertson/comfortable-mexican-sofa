@@ -3,6 +3,8 @@
 = form.text_field :label, data: {slugify: @layout.new_record?}
 = form.text_field :identifier, data: {slug: true}
 
+= form.check_box :is_profile_layout
+
 - if (options = Comfy::Cms::Layout.options_for_select(@site, @layout)).present?
   = form.select :parent_id, [["---- #{t('.select_parent_layout')} ----", nil]] + options, bootstrap: {custom_control: true}
 
