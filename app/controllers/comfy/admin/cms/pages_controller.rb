@@ -18,6 +18,8 @@ class Comfy::Admin::Cms::PagesController < Comfy::Admin::Cms::BaseController
 
     return index_for_redactor if params[:source] == "redactor"
 
+    @cms_page_title = "Pages Index"
+
     @pages_by_parent = pages_grouped_by_parent
 
     @pages =
@@ -29,10 +31,12 @@ class Comfy::Admin::Cms::PagesController < Comfy::Admin::Cms::BaseController
   end
 
   def new
+    @cms_page_title = "New Page"
     render
   end
 
   def edit
+    @cms_page_title = "Page Edit: #{@page.label}"
     render
   end
 

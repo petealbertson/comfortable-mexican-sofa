@@ -1,5 +1,5 @@
 %head
-  %title= ComfortableMexicanSofa.config.cms_title
+  %title= "#{ENV['SITE_ENV'] == "PRODUCTION" ? "" : "#{ENV['SITE_ENV']} - "}#{@cms_page_title if @cms_page_title}"
 
   %meta{"http-equiv" => "Content-type", content: "text/html; charset=utf-8"}
   %meta{charset: "utf-8"}
