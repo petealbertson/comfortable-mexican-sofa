@@ -44,8 +44,8 @@ class Comfy::Cms::Page < ActiveRecord::Base
 
   # -- Scopes ------------------------------------------------------------------
   scope :published, -> { where(is_published: true) }
-  scope :is_public, -> { where(families: false).where(professional: false) }
-  scope :family_viewable, -> { where(families: true).or(self.is_public) }
+  scope :is_public, -> { where(family: false).where(professional: false) }
+  scope :family_viewable, -> { where(family: true).or(self.is_public) }
   scope :worker_viewable, -> { where(professional: true).or(self.is_public) }
 
   # -- Class Methods -----------------------------------------------------------
@@ -114,7 +114,7 @@ class Comfy::Cms::Page < ActiveRecord::Base
   end
 
   def is_public
-    !self.professional and !self.families
+    !self.professional and !self.family
   end
 
   def is_viewable_by_role(role)
